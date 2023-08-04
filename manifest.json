@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+  "name": "Password Manager",
+  "version": "1.0",
+  "description": "Your description here",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "src/pages/popup.html",
+    "default_width": 400,
+    "default_height": 600
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "content_security_policy": "default-src 'self' https://*.firebaseio.com https://*.googleapis.com https://*.gstatic.com https://stackpath.bootstrapcdn.com; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com; img-src 'self' data: https://*.firebaseio.com https://*.googleapis.com; style-src 'self' 'unsafe-inline' https://stackpath.bootstrapcdn.com; font-src 'self' https://stackpath.bootstrapcdn.com;"
+}

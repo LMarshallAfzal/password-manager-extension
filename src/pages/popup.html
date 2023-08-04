@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Password Manager</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body>
+    <div class="container width">
+        <iframe id="content-placeholder" style="border: none; width: 100%; height: 400px"
+            scrolling="no">
+        </iframe>
+        
+
+        <div class="bottom-nav">
+            <button type="button" class="btn btn-secondary">
+                <img src="../assets/lock-outlined.png" class="icon" alt="Passwords">
+            </button>
+            <button type="button" class="btn btn-secondary">
+                <img src="../assets/generator-outlined.png" class="icon" alt="Generator">
+            </button>
+            <button type="button" class="btn btn-secondary">
+                <img src="../assets/user-outlined.png" class="icon" alt="Account">
+            </button>
+        </div>
+    </div>
+
+    <!-- Include popup.js as a module, assuming popup.js imports firebase-config.js -->
+    <script type="module" src="popup.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body>
+    <div id="generator" class="content">
+        <div class="container">
+            <form class="mx-auto w-90 mt-4">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" id="password" class="form-control form-control-lg" readonly>
+                        <div class="input-group-append">
+                            <button id="copy" class="btn btn-outline-secondary" type="button">Copy</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="length">Password length: <span id="length-display"></span></label>
+                    <input type="range" id="length" name="length" min="1" max="50" value="16" class="form-control-range">
+                </div>
+                <div class="form-group custom-form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="letters" checked>
+                        <label class="form-check-label" for="letters">
+                            Include letters (abcABC)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="numbers" checked>
+                        <label class="form-check-label" for="numbers">
+                            Include numbers (123)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="symbols">
+                        <label class="form-check-label" for="symbols">
+                            Include symbols ($&%)
+                        </label>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <script src="generator.js"></script>
+</body>
+
+</html>
