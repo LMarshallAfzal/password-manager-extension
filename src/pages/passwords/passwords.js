@@ -17,14 +17,24 @@ const fetchCredentials = async () => {
 
 const renderCredential = async (list, data) => {
   const listItem = document.createElement('li');
-  listItem.classList.add('list-group-item', 'd-flex', 'align-items-center', 'justify-content-between');
+  listItem.classList.add('list-group-item', 'd-flex', 'align-items-center');
 
   const imageRef = ref(storage, data.imageURL);
   const imageUrl = await getDownloadURL(imageRef);
+
   listItem.appendChild(createImage(imageUrl, data.accountName));
-  listItem.appendChild(createAccountName(data.accountName));
-  listItem.appendChild(createEmail(data.username));
-  listItem.appendChild(createGoToAccountButton(data.url));
+
+  const infoContainer = document.createElement('div');
+  infoContainer.classList.add('align-items-center', 'mr-3', 'info-container');
+  infoContainer.appendChild(createAccountName(data.accountName));
+  infoContainer.appendChild(createEmail(data.username));
+  listItem.appendChild(infoContainer);
+
+  const buttonContainer = document.createElement('div');
+  buttonContainer.classList.add('button-container');
+  buttonContainer.appendChild(createCopyCredentialsButton(data.url));
+  buttonContainer.appendChild(createGoToAccountButton(data.url));
+  listItem.appendChild(buttonContainer);
 
   list.appendChild(listItem);
 };
@@ -34,25 +44,28 @@ const createImage = (src, alt) => {
   image.src = src;
   image.alt = alt;
   image.width = 50;
+  image.classList.add('img-margin-right');
   return image;
 };
 
 const createAccountName = (name) => {
-  const accountName = document.createElement('h5');
+  const accountName = document.createElement('h6');
   accountName.textContent = name;
+  accountName.classList.add('mb-1');
   return accountName;
 };
 
 const createEmail = (email) => {
   const emailElement = document.createElement('p');
   emailElement.textContent = email;
+  emailElement.classList.add('mt-1', 'mb-1');
   return emailElement;
 };
 
 const createGoToAccountButton = (url) => {
-  const button = document.createElement('button'); // Change to a button element
-  button.classList.add('btn', 'btn-primary');
-  button.onclick = () => chrome.tabs.create({ url }); // This will open a new tab with the given URL
+  const button = document.createElement('button');
+  button.classList.add('btn', 'btn-primary', 'custom-btn');
+  button.onclick = () => window.open(url, '_blank');
 
   const icon = document.createElement('i');
   icon.classList.add('bi', 'bi-box-arrow-right');
@@ -62,6 +75,17 @@ const createGoToAccountButton = (url) => {
   return button;
 };
 
+const createCopyCredentialsButton = (url) => {
+  const button = document.createElement('button');
+  button.classList.add('btn', 'btn-primary', 'custom-btn'); 
+  button.onclick = () => window.open(url, '_blank');
 
+  const icon = document.createElement('i');
+  icon.classList.add('bi', 'bi-clipboard');
+
+  button.appendChild(icon);
+
+  return button;
+};
 
 fetchCredentials();

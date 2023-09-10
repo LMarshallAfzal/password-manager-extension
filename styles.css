@@ -39,6 +39,26 @@ body, html {
     border-color: #f8f9fa;
 }
 
+.btn-primary .bi {
+    color: black;
+}
+
+button.custom-btn {
+    margin: 1px;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+button.custom-btn:hover {
+    background-color: grey;
+    border-color: transparent;
+    color: white;
+}
+
+.img-margin-right {
+    margin-right: 7px;
+}
+
 .icon {
     width: 30px;
     height: 30px;
@@ -48,8 +68,31 @@ body, html {
     color: black;
 }
 
-.btn-primary .bi {
-    color: black;
+.info-container {
+    width: 250px; 
+    height: 50px; 
+    overflow: hidden; 
+    flex-shrink: 1;  /* Allow the container to shrink if needed */
+}
+
+.info-container h6,
+.info-container p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    gap: 3px; 
+    margin-left: auto;
+    margin-right: 1px;  /* Add a bit of margin to the right */
+    flex-shrink: 0;  /* Ensure the button container does not shrink */
+}
+
+.list-group-item {
+    justify-content: space-between;
 }
 
 .custom-form-group {
