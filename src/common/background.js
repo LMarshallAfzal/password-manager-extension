@@ -1,3 +1,5 @@
+import { db } from '../../../firebase-config.js';
+import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 
 // Run the initialization when the background script is loaded
 initialize();
@@ -17,7 +19,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       const currentURL = request.url;
 
       // Access the 'accounts' collection in Firestore
-      const db = firebase.firestore();
       db.collection("accounts").get().then((querySnapshot) => {
           const savedURLs = [];
           querySnapshot.forEach((doc) => {

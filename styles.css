@@ -44,6 +44,14 @@ body, html {
     height: 30px;
 }
 
+.bi {
+    color: black;
+}
+
+.btn-primary .bi {
+    color: black;
+}
+
 .custom-form-group {
     width: 70%;  
     margin: 0 auto; 
