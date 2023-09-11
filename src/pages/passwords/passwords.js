@@ -17,7 +17,7 @@ const fetchCredentials = async () => {
 
 const renderCredential = async (list, data) => {
   const listItem = document.createElement('li');
-  listItem.classList.add('list-group-item', 'd-flex', 'align-items-center');
+  listItem.classList.add('pw-list-group-item', 'd-flex', 'align-items-center');
 
   const imageRef = ref(storage, data.imageURL);
   const imageUrl = await getDownloadURL(imageRef);
@@ -25,13 +25,13 @@ const renderCredential = async (list, data) => {
   listItem.appendChild(createImage(imageUrl, data.accountName));
 
   const infoContainer = document.createElement('div');
-  infoContainer.classList.add('align-items-center', 'mr-3', 'info-container');
+  infoContainer.classList.add('align-items-center', 'mr-3', 'pw-info-container');
   infoContainer.appendChild(createAccountName(data.accountName));
   infoContainer.appendChild(createEmail(data.username));
   listItem.appendChild(infoContainer);
 
   const buttonContainer = document.createElement('div');
-  buttonContainer.classList.add('button-container');
+  buttonContainer.classList.add('pw-button-container');
   buttonContainer.appendChild(createCopyCredentialsButton(data.url));
   buttonContainer.appendChild(createGoToAccountButton(data.url));
   listItem.appendChild(buttonContainer);
@@ -44,7 +44,7 @@ const createImage = (src, alt) => {
   image.src = src;
   image.alt = alt;
   image.width = 50;
-  image.classList.add('img-margin-right');
+  image.classList.add('pw-img-margin-right');
   return image;
 };
 
@@ -64,7 +64,7 @@ const createEmail = (email) => {
 
 const createGoToAccountButton = (url) => {
   const button = document.createElement('button');
-  button.classList.add('btn', 'btn-primary', 'custom-btn');
+  button.classList.add('btn', 'btn-primary', 'pw-custom-btn');
   button.onclick = () => window.open(url, '_blank');
 
   const icon = document.createElement('i');
@@ -77,7 +77,7 @@ const createGoToAccountButton = (url) => {
 
 const createCopyCredentialsButton = (url) => {
   const button = document.createElement('button');
-  button.classList.add('btn', 'btn-primary', 'custom-btn'); 
+  button.classList.add('btn', 'btn-primary', 'pw-custom-btn'); 
   button.onclick = () => window.open(url, '_blank');
 
   const icon = document.createElement('i');
