@@ -1,38 +1,50 @@
 import { db } from '../../../firebase-config.js';
 import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 
-// Run the initialization when the background script is loaded
-initialize();
+function checkURL(currentURL, sendResponse) {
+  const accountsCollection = collection(db, "accounts");
 
-// You might also want to add listeners for other events that are relevant to your extension
-// For example, you might listen for tabs being updated and run your analysis on the new page:
-
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.status === 'complete' && tab.active) {
-    // The tab has finished loading; you can run your analysis here
-    // You might need to inject a content script or send a message to an existing content script
-  }
-});
-
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.type === "CHECK_URL") {
-      const currentURL = request.url;
-
-      // Access the 'accounts' collection in Firestore
-      db.collection("accounts").get().then((querySnapshot) => {
-          const savedURLs = [];
-          querySnapshot.forEach((doc) => {
-              savedURLs.push(doc.data().url);  // Extracting the 'url' field from each document
-          });
-
-          const matchFound = savedURLs.includes(currentURL);
-          sendResponse({ matchFound });
-      }).catch((error) => {
-          console.error("Error fetching saved URLs from accounts: ", error);
-          sendResponse({ matchFound: false });
+  getDocs(accountsCollection)
+    .then((querySnapshot) => {
+      const savedURLs = [];
+    
+      querySnapshot.forEach((doc) => {
+        savedURLs.push(doc.data().url);
       });
 
+      console.log("saved URLs:", savedURLs);
+
+      const matchFound = savedURLs.includes(currentURL);
+      savedURLs.push(doc.data().url);
+    })
+    .catch((error) => {
+      console.error("Error fetching saved URLS from accounts: ", error);
+      sendResponse({matchFound: false});
+    });
+}
+
+initialize();
+
+function initialize() {
+  //Listen for message from content scripts or popup scripts
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.type === "CHECK_URL") {
+      const currentURL = request.url;
+
+      // Call the function to check the URL against Firestore
+      checkURL(currentURL, sendResponse);
+
       return true; // This is important because the response is asynchronous
-  }
-});
+    }
+  });
+
+  // Listen for tab updates
+  chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    if (changeInfo.status === 'complete' && tab.active) {
+      const tabUrl = tab.url;
+
+      console.log('Active tab URL:', tabUrl);
+    }
+  });
+} 
 

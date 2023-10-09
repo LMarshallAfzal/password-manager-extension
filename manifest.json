@@ -11,11 +11,13 @@
   },
   "background": {
     "scripts": ["src/common/background.js"],
-    "persistent": false
+    "persistent": false,
+    "type": "module"
   },
   "permissions": [
     "activeTab",
     "storage",
+    "tabs",
     "http://*/*",
     "https://*/*"
   ],
